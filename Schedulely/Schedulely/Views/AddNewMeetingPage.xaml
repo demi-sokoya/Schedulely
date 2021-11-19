@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Schedulely.Views.AddNewMeetingPage"
+             xmlns:models="clr-namespace:Schedulely.Models">
+            
+    <ContentPage.Content>
+        <AbsoluteLayout Padding="20" >
+            <StackLayout>
+                <Editor Placeholder="Add Title" />
+                <Label Text="Group" FontSize="Large"/>
+                <DatePicker Format="ddd., MMM. dd, yyyy" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Start:" VerticalOptions="Center" FontSize="Large" FontFamily="CustomFont"/>
+                    <TimePicker/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal"  Padding="0,10,0,0">
+                    <Label Text="End:" VerticalOptions="Center" FontSize="Large" FontFamily="CustomFont" Padding="0,0,10,0"/>
+                    <TimePicker />
+                </StackLayout>
+                <StackLayout Orientation="Vertical" Padding="0,10,0,0">
+                    <Label Text="Add Participants" FontSize="Large" FontFamily="CustomFont"/>
+                    <ImageButton Source="plus.png" HeightRequest="20" WidthRequest="20" BackgroundColor="Transparent" HorizontalOptions="Start" />
+                </StackLayout>
+                <ListView x:Name="participants">
+                    
+                </ListView>
+            </StackLayout>
+
+
+            <ImageButton Source="fab.png"
+                         HorizontalOptions="End"
+                         BackgroundColor="Transparent"
+                         HeightRequest="40"
+                         AbsoluteLayout.LayoutFlags="PositionProportional"
+                         AbsoluteLayout.LayoutBounds=".95,1, 60, 60"
+                         />
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

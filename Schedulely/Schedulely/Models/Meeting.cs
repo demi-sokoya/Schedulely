@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Schedulely.Models
 {
-    public class Event
+    public class Meeting
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public ICollection<Group> GroupId { get; set; }
         public DateTime Date { get; set; }

@@ -12,5 +12,6 @@ namespace Schedulely.Services
         Task<Group> GetGroup(int groupId);
         Task AddGroup(Group group);
         Task UpdateGroup(Group group);
+        Task RemoveGroup(Group group);
     }
 }

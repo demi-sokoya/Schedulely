@@ -2,30 +2,66 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Schedulely.Views.AddNewMeetingPage"
-             xmlns:models="clr-namespace:Schedulely.Models">
-            
+             xmlns:models="clr-namespace:Schedulely.Models"
+             xmlns:viewmodels="clr-namespace:Schedulely.ViewModels">
+
+    <ContentPage.BindingContext>
+        <viewmodels:AddNewMeetingViewModel/>
+    </ContentPage.BindingContext>
+
     <ContentPage.Content>
         <AbsoluteLayout Padding="20" >
-            <StackLayout>
-                <Editor Placeholder="Add Title" />
-                <Label Text="Group" FontSize="Large"/>
-                <DatePicker Format="ddd., MMM. dd, yyyy" />
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Start:" VerticalOptions="Center" FontSize="Large" FontFamily="CustomFont"/>
-                    <TimePicker/>
+            <StackLayout AbsoluteLayout.LayoutFlags="All"
+                         AbsoluteLayout.LayoutBounds="0,0,1,1">
+
+                <StackLayout >
+                    <Editor Placeholder="Add Title" 
+                        Text="{Binding MeetingTitle}"/>
+                    <Label Text="Group" FontSize="Large"/>
+                    <StackLayout Orientation="Horizontal"
+                                 Spacing="20">
+
+                        <Picker HorizontalOptions="FillAndExpand"
+                            
+                        ItemsSource="{Binding Groups}"
+                        ItemDisplayBinding="{Binding GroupName}"
+                        SelectedIndex="{Binding ChosenGroup}">
+
+                        </Picker>
+                        <ImageButton Source="edit.png"
+                                     Clicked="EditGroup_OnCLicked"
+                                     HeightRequest="20"/>
+                    </StackLayout>
+
+                    <DatePicker Format="ddd., MMM. dd, yyyy" 
+                            Date="{Binding Date}"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Start:" VerticalOptions="Center" FontSize="Large" FontFamily="CustomFont"/>
+                        <TimePicker Time="{Binding StartTime.Hour}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal"  Padding="0,10,0,0">
+                        <Label Text="End:" VerticalOptions="Center" FontSize="Large" FontFamily="CustomFont" Padding="0,0,10,0"/>
+                        <TimePicker Time="{Binding EndTime}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" Padding="0,10,0,0">
+                        <Label Text="Add Participants" FontSize="Large" FontFamily="CustomFont"/>
+                        <Frame Padding="10"
+                                   BorderColor="#C6C6C6"
+                                   HasShadow="False">
+                            <Editor Placeholder="Notes"
+                                       WidthRequest="250"
+                                       HeightRequest="200"
+                                      
+                                    />
+                        </Frame>
+                        <!--<ImageButton Source="plus.png" HeightRequest="20" WidthRequest="20" BackgroundColor="Transparent" HorizontalOptions="Start" />-->
+                    </StackLayout>
+                    <ListView x:Name="participants">
+
+                    </ListView>
                 </StackLayout>
-                <StackLayout Orientation="Horizontal"  Padding="0,10,0,0">
-                    <Label Text="End:" VerticalOptions="Center" FontSize="Large" FontFamily="CustomFont" Padding="0,0,10,0"/>
-                    <TimePicker />
-                </StackLayout>
-                <StackLayout Orientation="Vertical" Padding="0,10,0,0">
-                    <Label Text="Add Participants" FontSize="Large" FontFamily="CustomFont"/>
-                    <ImageButton Source="plus.png" HeightRequest="20" WidthRequest="20" BackgroundColor="Transparent" HorizontalOptions="Start" />
-                </StackLayout>
-                <ListView x:Name="participants">
-                    
-                </ListView>
             </StackLayout>
+           
 
 
             <ImageButton Source="fab.png"
@@ -34,7 +70,7 @@
                          HeightRequest="40"
                          AbsoluteLayout.LayoutFlags="PositionProportional"
                          AbsoluteLayout.LayoutBounds=".95,1, 60, 60"
-                         />
+                         Command="{Binding AddCommand}"/>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

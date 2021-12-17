@@ -21,7 +21,7 @@ namespace Schedulely.Services
 
         private List<Group> ReadFile()
         {
-            File.Delete(FilePath);
+            //File.Delete(FilePath);
             try
             {
                 var jsonString = File.ReadAllText(FilePath);
@@ -89,6 +89,15 @@ namespace Schedulely.Services
             groups.Add(group);
 
             WriteFile(groups);
+        }
+
+        public async Task RemoveGroup(Group Group)
+        {
+            var Groups = ReadFile();
+            Groups[Groups.FindIndex(p => p.GroupId == Group.GroupId)] = Group;
+            Groups.Remove(Group);
+
+            WriteFile(Groups);
         }
     }
 }

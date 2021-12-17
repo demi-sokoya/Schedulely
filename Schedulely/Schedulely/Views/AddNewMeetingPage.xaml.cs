@@ -26,5 +26,14 @@ namespace Schedulely.Views
         {
 
         }
+
+        private async void EditGroup_OnCLicked(object sender, EventArgs e)
+        {
+           
+
+            CategoriesPage CategoryPage = new CategoriesPage();
+            CategoryPage.OnDissapearing;
+            await Navigation.PushAsync(CategoryPage);
+        }
     }
 }

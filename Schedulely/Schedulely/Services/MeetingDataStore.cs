@@ -15,13 +15,26 @@ namespace Schedulely.Services
             get
             {
                 var basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                return Path.Combine(basePath, "Meetings.json");
+                var filePath =  Path.Combine(basePath, "Meetings.json");
+                if (!File.Exists(filePath)) {
+                    
+
+                    
+                        using (var tw = new StreamWriter(filePath, true))
+                        {
+                            tw.WriteLine("");
+                        }
+
+                    
+                }
+                return filePath;
+                
             }
         }
 
         private List<Meeting> ReadFile()
         {
-            File.Delete(FilePath);
+            
             try
             {
                 var jsonString = File.ReadAllText(FilePath);
@@ -44,12 +57,7 @@ namespace Schedulely.Services
         {
             var Meetings = new List<Meeting>()
             {
-                //new Meeting { Id = 1, Name = "Meeting A Local Json File", Description = "This is Meeting a." },
-                //new Meeting { Id = 2, Name = "Meeting B Local Json File", Description = "This is Meeting b." },
-                //new Meeting { Id = 3, Name = "Meeting C Local Json File", Description = "This is Meeting c." },
-                //new Meeting { Id = 4, Name = "Meeting D Local Json File", Description = "This is Meeting d." }
-
-                //new Meeting { Id = 1, Amount = 60, Date = DateTime.Now, Recurring = false, Notes = "Dummy entry", Type = Meeting.MeetingType.Expense}
+                new Meeting { Id= 1, Title = "New Meeting"}
             };
 
             return Meetings;
